@@ -30,6 +30,18 @@ class TicTacToe:
 
     return '\n'.join(result)
 
+  def reset(self):
+    self.board = [[
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ], [
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]]
+    self.turn = 0
+
   def play(self, row: int, col: int) -> bool:
     opponent = 1 - self.turn
     if self.board[self.turn][row][col] or self.board[opponent][row][col]:
@@ -64,3 +76,12 @@ class TicTacToe:
           return False
 
     return True
+
+  def get_legal_plays(self) -> list:
+    moves = []
+    for rowIndex in range(3):
+      for colIndex in range(3):
+        if not (self.board[0][rowIndex][colIndex] or self.board[1][rowIndex][colIndex]):
+          moves.append((rowIndex, colIndex))
+
+    return moves
