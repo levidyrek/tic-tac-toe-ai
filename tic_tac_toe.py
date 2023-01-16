@@ -10,6 +10,7 @@ class TicTacToe:
       [0, 0, 0],
     ]]
     self.turn = 0
+    self.plays = []
 
   def __str__(self) -> str:
     result = []
@@ -41,6 +42,7 @@ class TicTacToe:
       [0, 0, 0],
     ]]
     self.turn = 0
+    self.plays = []
 
   def play(self, row: int, col: int) -> bool:
     opponent = 1 - self.turn
@@ -48,6 +50,7 @@ class TicTacToe:
       return False
 
     self.board[self.turn][row][col] = 1
+    self.plays.append((self.turn, row, col))
     self.turn = opponent
     return True
 
@@ -85,3 +88,8 @@ class TicTacToe:
           moves.append((rowIndex, colIndex))
 
     return moves
+
+  def reverse_last_play(self):
+    self.turn = 1 - self.turn
+    (player, row, col) = self.plays.pop()
+    self.board[player][row][col] = 0
