@@ -1,2 +1,2 @@
 # tic-tac-toe-ai
-An AI that will beat you at chess
+Self-supervised, reinforced tic tac toe AI
