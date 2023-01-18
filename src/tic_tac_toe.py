@@ -73,6 +73,10 @@ class TicTacToe:
     return None
 
   def is_over(self) -> bool:
+    winner = self.get_winner()
+    if winner is not None:
+      return True
+
     for rowIndex in range(3):
       for colIndex in range(3):
         if not (self.board[0][rowIndex][colIndex] or self.board[1][rowIndex][colIndex]):
@@ -89,7 +93,21 @@ class TicTacToe:
 
     return moves
 
-  def reverse_last_play(self):
+  def get_legal_plays_matrix(self) -> list:
+    legal_plays = self.get_legal_plays()
+    legal_plays_matrix = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+    ]
+
+    for move in legal_plays:
+        legal_plays_matrix[move[0]][move[1]] = 1
+
+    return legal_plays_matrix
+
+  def pop_last_play(self):
     self.turn = 1 - self.turn
     (player, row, col) = self.plays.pop()
     self.board[player][row][col] = 0
+    return (player, row, col)
